@@ -1,3 +1,7 @@
 node_modules
 .DS_Store
 *.pem
+background.js
+_metadata
+manifest.json
+rules.json
