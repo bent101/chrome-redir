@@ -9,7 +9,7 @@
       }
     },
     "condition": {
-      "urlFilter": "x.com|twitter.com|youtube.com|tiktok.com",
+      "urlFilter": "x.com|twitter.com|youtube.com|tiktok.com|twitch.tv",
       "resourceTypes": [
         "main_frame"
       ]

@@ -12,7 +12,8 @@
     "*://*.x.com/*",
     "*://*.twitter.com/*",
     "*://*.youtube.com/*",
-    "*://*.tiktok.com/*"
+    "*://*.tiktok.com/*",
+    "*://*.twitch.tv/*"
   ],
   "background": {
     "service_worker": "background.js"
