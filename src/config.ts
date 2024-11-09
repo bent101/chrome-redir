@@ -4,6 +4,6 @@ export const REDIRECT_SITES = [
 	"youtube.com",
 	"tiktok.com",
 	"twitch.tv",
-] as const;
+];
 
-export const REDIRECT_TO = "https://bsky.app" as const;
+export const REDIRECT_TO = "https://bsky.app";

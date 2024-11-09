@@ -2,10 +2,11 @@
 	"compilerOptions": {
 		"target": "ESNext",
 		"module": "ESNext",
-		"moduleResolution": "bundler",
-		"types": ["bun-types", "chrome"],
+		"moduleResolution": "Bundler",
+		"types": ["chrome", "bun-types"],
 		"strict": true,
 		"skipLibCheck": true,
-		"noEmit": true
+		"noEmit": true,
+		"noImplicitAny": true
 	}
 }

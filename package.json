@@ -3,9 +3,9 @@
 	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
-		"build": "bun run index.ts && bun build ./src/background.ts --outdir ./dist",
-		"watch:build": "bun --watch index.ts",
-		"watch:bundle": "bun build ./src/background.ts --outdir . --watch",
+		"build": "bun run src/index.ts && bun build ./src/background.ts --outdir ./dist",
+		"watch:build": "bun --watch src/index.ts",
+		"watch:bundle": "bun build ./src/background.ts --outdir ./dist --watch",
 		"watch": "concurrently \"bun run watch:build\" \"bun run watch:bundle\""
 	},
 	"devDependencies": {
@@ -14,5 +14,5 @@
 		"typescript": "^5.0.0",
 		"concurrently": "^8.2.2"
 	},
-	"module": "index.ts"
+	"module": "src/index.ts"
 }

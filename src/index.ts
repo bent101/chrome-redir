@@ -1,8 +1,8 @@
 import { writeFileSync } from "fs";
-import { REDIRECT_SITES, REDIRECT_TO } from "./src/config";
+import { REDIRECT_SITES, REDIRECT_TO } from "./config";
 
 writeFileSync(
-	"manifest.json",
+	"./dist/manifest.json",
 	JSON.stringify(
 		{
 			manifest_version: 3,
@@ -34,7 +34,7 @@ writeFileSync(
 );
 
 writeFileSync(
-	"rules.json",
+	"./dist/rules.json",
 	JSON.stringify(
 		[
 			{
@@ -47,7 +47,7 @@ writeFileSync(
 					},
 				},
 				condition: {
-					urlFilter: REDIRECT_SITES.join("|"),
+					urlFilter: `||${REDIRECT_SITES.join("|")}`,
 					resourceTypes: ["main_frame"],
 				},
 			},
