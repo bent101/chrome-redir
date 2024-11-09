@@ -1,7 +1,10 @@
 node_modules
+dist
+*.js
+!build.js
+rules.json
+manifest.json
 .DS_Store
 *.pem
 background.js
 _metadata
-manifest.json
-rules.json
