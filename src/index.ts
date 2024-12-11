@@ -1,5 +1,5 @@
 import { writeFileSync } from "fs";
-import { REDIRECT_SITES, REDIRECT_TO } from "./config";
+import { BLOCKED_SITES, REDIRECT_TO } from "./config";
 
 writeFileSync(
 	"./dist/manifest.json",
@@ -13,8 +13,9 @@ writeFileSync(
 				"webNavigation",
 				"webRequest",
 				"declarativeNetRequest",
+				"tabs",
 			],
-			host_permissions: REDIRECT_SITES.map((site) => `*://*.${site}/*`),
+			host_permissions: BLOCKED_SITES.map((site) => `*://*.${site}/*`),
 			background: {
 				service_worker: "background.js",
 			},
@@ -36,22 +37,24 @@ writeFileSync(
 writeFileSync(
 	"./dist/rules.json",
 	JSON.stringify(
-		[
-			{
-				id: 1,
-				priority: 1,
-				action: {
-					type: "redirect",
-					redirect: {
-						url: REDIRECT_TO,
+		REDIRECT_TO
+			? [
+					{
+						id: 1,
+						priority: 1,
+						action: {
+							type: "redirect",
+							redirect: {
+								url: REDIRECT_TO,
+							},
+						},
+						condition: {
+							urlFilter: `||${BLOCKED_SITES.join("|")}`,
+							resourceTypes: ["main_frame"],
+						},
 					},
-				},
-				condition: {
-					urlFilter: `||${REDIRECT_SITES.join("|")}`,
-					resourceTypes: ["main_frame"],
-				},
-			},
-		],
+			  ]
+			: [],
 		null,
 		2
 	)

@@ -1,22 +1,21 @@
-import { REDIRECT_SITES, REDIRECT_TO } from "./config";
+import { BLOCKED_SITES, REDIRECT_TO } from "./config";
 
-function shouldRedirect(url: string) {
-	if (url === REDIRECT_TO) return false; // avoids cluttering logs and infinite loop
-
+function shouldBlock(url: string) {
+	if (REDIRECT_TO && url === REDIRECT_TO) return false;
 	const hostname = new URL(url).hostname.replace(/^www\./, "");
-	const shouldRedirect = REDIRECT_SITES.includes(hostname);
-
-	console.table({ url, hostname, shouldRedirect });
-
-	return shouldRedirect;
+	return BLOCKED_SITES.includes(hostname);
 }
 
 chrome.webNavigation.onBeforeNavigate.addListener((details) => {
-	if (details.frameId !== 0) return; // dont redirect iframes
+	if (details.frameId !== 0) return; // dont redirect iframes -- causes false positives on google search results
 
-	if (shouldRedirect(details.url)) {
-		chrome.tabs.update(details.tabId, {
-			url: REDIRECT_TO,
-		});
+	if (shouldBlock(details.url)) {
+		if (REDIRECT_TO === null) {
+			chrome.tabs.remove(details.tabId);
+		} else {
+			chrome.tabs.update(details.tabId, {
+				url: REDIRECT_TO,
+			});
+		}
 	}
 });
